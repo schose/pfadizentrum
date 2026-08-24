@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/die-region/</loc>
+  </url><url>
+    <loc>http://localhost:1313/kontakt/</loc>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/platz-gebaeude/</loc>
+  </url><url>
+    <loc>http://localhost:1313/preise/</loc>
+  </url><url>
+    <loc>http://localhost:1313/verein/</loc>
+  </url>
+</urlset>
