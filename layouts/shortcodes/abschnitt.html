@@ -1,0 +1,11 @@
+{{- /*
+  Zweispaltiger Abschnitt: links Text, rechts Bilder.
+
+      {{< abschnitt >}}
+      {{% text %}} ...Markdown... {{% /text %}}
+      {{% medien %}} ![](2024/05/foto.jpg) {{% /medien %}}
+      {{< /abschnitt >}}
+*/ -}}
+<div class="wp-block-columns is-layout-flex wp-block-columns-is-layout-flex pz-abschnitt">
+{{ .Inner }}
+</div>

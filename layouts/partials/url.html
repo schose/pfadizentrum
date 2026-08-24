@@ -1,0 +1,5 @@
+{{- /* Wandelt einen site-root-relativen Pfad ("/wp-content/x.png") in eine URL um,
+       die auch unter einem Unterverzeichnis-baseURL (GitHub Pages) funktioniert.
+       Hinweis: relURL laesst fuehrende Slashes unveraendert und ergaenzt das
+       baseURL-Unterverzeichnis NICHT - deshalb wird der Slash vorher entfernt. */ -}}
+{{- (strings.TrimPrefix "/" .) | relURL -}}

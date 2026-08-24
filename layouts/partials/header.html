@@ -9,14 +9,9 @@
 				<ul id="menu-menue" class="top-menu with-effect menu--ferdinand opener-icons-on">
 {{- $page := . }}
 {{- range site.Menus.main }}
-	{{- /* Hugo praefixt Menue-URLs aus der Config bereits mit dem baseURL-Pfad */ -}}
-	{{- $url := .URL }}
-	{{- $active := eq $url $page.RelPermalink }}
-	{{- $cls := slice "menu-item" "menu-item-type-post_type" "menu-item-object-page" }}
-	{{- if .Params.home }}{{ $cls = $cls | append "menu-item-home" }}{{ end }}
-	{{- if $active }}{{ $cls = $cls | append "current-menu-item" "page_item" (printf "page-item-%v" .Params.pageId) "current_page_item" }}{{ end }}
-	{{- $cls = $cls | append (printf "menu-item-%v" .Params.itemId) "normal-menu" }}
-	{{- printf `<li id="menu-item-%v" class="%s"><a href="%s"><span><em>%s</em></span></a></li>` .Params.itemId (delimit $cls " ") $url .Name | safeHTML }}
+	{{- $aktiv := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+	{{- $cls := cond $aktiv "menu-item current-menu-item" "menu-item" }}
+	<li class="{{ $cls }}"><a href="{{ .URL }}"><span><em>{{ .Name }}</em></span></a></li>
 {{- end -}}
 				</ul>
 			</div>

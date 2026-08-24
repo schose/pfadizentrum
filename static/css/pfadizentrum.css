@@ -1,0 +1,92 @@
+/*
+ * Pfadizentrum - Layout-Regeln der Inhaltsbausteine.
+ *
+ * Alles, was frueher als style="..." mitten im Seiteninhalt stand, steht jetzt
+ * hier. Wer Inhalte pflegt, muss diese Datei nicht anfassen.
+ */
+
+:root {
+	/* Akzentfarbe des Themes. Im WordPress-Export stand hier
+	   var(--wp--preset--color--primary) - diese Variable war nie definiert,
+	   die Farbe blieb deshalb wirkungslos. Zum Aktivieren: #3957ff eintragen. */
+	--pz-akzent: currentColor;
+	--pz-linie: #555;
+}
+
+/* --- Zweispaltiger Abschnitt -------------------------------------------- */
+.pz-abschnitt {
+	flex-wrap: nowrap;
+}
+
+/* --- Abschnittsueberschrift --------------------------------------------- */
+.pz-titel .pz-kicker {
+	border-left: 4px solid var(--pz-linie);
+	padding-left: 16px;
+}
+
+.pz-titel .pz-ueberschrift {
+	line-height: 1;
+}
+
+.pz-titel--zentriert {
+	margin: 0 0 30px;
+}
+
+.pz-titel--zentriert .pz-kicker {
+	border-left: 0;
+	padding-left: 0;
+	text-align: center;
+	color: var(--pz-akzent);
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.pz-titel--zentriert .pz-trenner {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.pz-titel--zentriert .pz-ueberschrift {
+	text-align: center;
+	margin-top: 0;
+}
+
+/* --- Logo-Raster (Partner, Foerderer) ----------------------------------- */
+.pz-logos {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
+	justify-content: center;
+	padding: 60px 20px;
+}
+
+.pz-logo {
+	flex: 1 1 260px;
+	max-width: 360px;
+	text-align: center;
+}
+
+.pz-logo img {
+	width: auto;
+	height: 100px;
+	margin-bottom: 25px;
+}
+
+.pz-logo .pz-logo-titel {
+	text-align: center;
+}
+
+/* --- Einbettungen (Kalender, Karte) ------------------------------------- */
+.pz-einbettung iframe {
+	display: block;
+	width: 100%;
+	height: var(--pz-embed-hoehe, 800px);
+	border: solid 1px #777;
+}
+
+@media (max-width: 781px) {
+	.pz-abschnitt {
+		flex-wrap: wrap;
+	}
+}

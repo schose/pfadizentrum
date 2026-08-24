@@ -1,0 +1,55 @@
+{{- /*
+  Markdown-Bild -> responsives <figure>.
+
+  Schreibweise im Markdown:
+      ![Alternativtext](2024/05/jurtenburg.jpg)
+      ![Alternativtext](2024/05/jurtenburg.jpg "Bildunterschrift")
+
+  Der Pfad ist relativ zu static/wp-content/uploads/. Die kleineren Varianten
+  fuer srcset erzeugt Hugo selbst - es muss nur EINE Datei abgelegt werden.
+*/ -}}
+{{- $src := .Destination -}}
+{{- $caption := .Title -}}
+{{- $alt := .PlainText -}}
+{{- $class := .Attributes.class | default "" -}}
+
+{{- $res := "" -}}
+{{- if not (urls.Parse $src).Scheme -}}
+	{{- $rel := strings.TrimPrefix "/" $src -}}
+	{{- $rel = strings.TrimPrefix "wp-content/uploads/" $rel -}}
+	{{- $res = resources.Get (printf "uploads/%s" $rel) -}}
+{{- end -}}
+
+{{- if $res -}}
+	{{- /* Anzeigebreite wie im WordPress-Original: hoechstens 1024px. */ -}}
+	{{- $display := $res -}}
+	{{- if gt $res.Width 1024 }}{{ $display = $res.Resize "1024x q85" }}{{ end -}}
+	{{- $widths := slice 300 768 1024 1536 -}}
+	{{- $set := slice -}}
+	{{- range $widths -}}
+		{{- if le . $res.Width -}}
+			{{- $v := cond (eq . $res.Width) $res ($res.Resize (printf "%dx q85" .)) -}}
+			{{- $set = $set | append (printf "%s %dw" $v.RelPermalink $v.Width) -}}
+		{{- end -}}
+	{{- end -}}
+	{{- $set = $set | append (printf "%s %dw" $res.RelPermalink $res.Width) -}}
+	<figure class="wp-block-image{{ with $class }} {{ . }}{{ end }}">
+		<img src="{{ $display.RelPermalink }}" width="{{ $display.Width }}" height="{{ $display.Height }}"
+			srcset="{{ delimit (uniq $set) ", " }}"
+			sizes="(max-width: {{ $display.Width }}px) 100vw, {{ $display.Width }}px"
+			alt="{{ $alt }}" loading="lazy" decoding="async" />
+		{{- with $caption }}<figcaption class="wp-element-caption">{{ . | markdownify }}</figcaption>{{ end }}
+	</figure>
+{{- else -}}
+	{{- /* Externe URL oder Datei nicht gefunden. Bei einem lokalen Pfad wird
+	       trotzdem eine gueltige URL erzeugt, damit der Fehler sichtbar wird. */ -}}
+	{{- $fallback := $src -}}
+	{{- if not (urls.Parse $src).Scheme -}}
+		{{- $fallback = partial "url.html" (printf "/wp-content/uploads/%s" (strings.TrimPrefix "/" $src)) -}}
+		{{- warnf "Bild nicht gefunden: %s (erwartet unter static/wp-content/uploads/)" $src -}}
+	{{- end -}}
+	<figure class="wp-block-image{{ with $class }} {{ . }}{{ end }}">
+		<img src="{{ $fallback }}" alt="{{ $alt }}" loading="lazy" decoding="async" />
+		{{- with $caption }}<figcaption class="wp-element-caption">{{ . | markdownify }}</figcaption>{{ end }}
+	</figure>
+{{- end -}}

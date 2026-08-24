@@ -1,0 +1,14 @@
+{{- /*
+  Markdown-Link.
+  - Interne Ziele ("/verein/") bekommen automatisch das Unterverzeichnis
+    der Website vorangestellt.
+  - Externe Ziele (http/https) oeffnen in einem neuen Tab, so wie im
+    WordPress-Original. mailto: und interne Links bleiben im selben Tab.
+*/ -}}
+{{- $ziel := .Destination -}}
+{{- $schema := (urls.Parse $ziel).Scheme -}}
+{{- $extern := or (eq $schema "http") (eq $schema "https") -}}
+{{- if and (eq $schema "") (hasPrefix $ziel "/") -}}
+	{{- $ziel = partial "url.html" $ziel -}}
+{{- end -}}
+<a href="{{ $ziel }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $extern }} rel="noreferrer noopener" target="_blank"{{ end }}>{{ .Text }}</a>

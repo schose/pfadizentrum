@@ -1,0 +1,20 @@
+{{- /*
+  Abschnittsueberschrift mit kleiner Zeile darueber.
+
+      {{< titel kicker="Faire Preise für Gruppen" >}}Preisliste{{< /titel >}}
+      {{< titel kicker="..." zentriert="true" >}}Unsere Partner{{< /titel >}}
+*/ -}}
+{{- $kicker := .Get "kicker" -}}
+{{- $zentriert := eq (.Get "zentriert" | default "") "true" -}}
+{{- if $zentriert -}}
+<div class="pz-titel pz-titel--zentriert">
+	{{- with $kicker }}<h4 class="pz-kicker">{{ . | markdownify }}</h4>{{ end }}
+	<hr class="pz-trenner" />
+	<h2 class="pz-ueberschrift">{{ .Inner | markdownify }}</h2>
+</div>
+{{- else -}}
+<div class="pz-titel">
+	{{- with $kicker }}<h5 class="pz-kicker">{{ . | markdownify }}</h5>{{ end }}
+	<h3 class="pz-ueberschrift">{{ .Inner | markdownify }}</h3>
+</div>
+{{- end -}}

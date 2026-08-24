@@ -1,0 +1,19 @@
+{{- $src := .Get "src" -}}
+{{- $url := .Get "url" -}}
+{{- $rel := strings.TrimPrefix "wp-content/uploads/" (strings.TrimPrefix "/" $src) -}}
+{{- $res := resources.Get (printf "uploads/%s" $rel) -}}
+<div class="pz-logo">
+	{{- $schema := (urls.Parse $url).Scheme -}}
+	{{- $extern := or (eq $schema "http") (eq $schema "https") -}}
+	{{- $ziel := cond $extern $url (partial "url.html" $url) -}}
+	{{- with $url }}<a href="{{ $ziel }}"{{ if $extern }} rel="noreferrer noopener" target="_blank"{{ end }}>{{ end -}}
+	{{- if $res -}}
+		{{- $img := cond (gt $res.Width 600) ($res.Resize "600x q85") $res -}}
+		<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ trim .Inner " " }}" loading="lazy" decoding="async" />
+	{{- else -}}
+		{{- warnf "Logo nicht gefunden: %s (erwartet unter static/wp-content/uploads/)" $src -}}
+		<img src="{{ partial "url.html" (printf "/wp-content/uploads/%s" (strings.TrimPrefix "/" $src)) }}" alt="{{ trim .Inner " " }}" loading="lazy" decoding="async" />
+	{{- end -}}
+	{{- with $url }}</a>{{ end }}
+	<h4 class="pz-logo-titel">{{ .Inner | markdownify }}</h4>
+</div>

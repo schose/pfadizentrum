@@ -1,0 +1,9 @@
+{{- /*
+  Fremdinhalt einbetten (Google-Kalender, Karte, Video).
+
+      {{< einbetten src="https://calendar.google.com/..." hoehe="800" titel="Belegungsplan" >}}
+*/ -}}
+<div class="pz-einbettung" style="--pz-embed-hoehe: {{ .Get "hoehe" | default "800" }}px">
+	<iframe src="{{ .Get "src" }}" title="{{ .Get "titel" | default "Eingebetteter Inhalt" }}"
+		height="{{ .Get "hoehe" | default "800" }}" loading="lazy" frameborder="0" scrolling="no"></iframe>
+</div>

@@ -15,9 +15,41 @@ disableKinds = ['taxonomy', 'term']
 
 [markup.goldmark.renderer]
   unsafe = true
+  # Eine neue Zeile im Markdown ist auch im Ergebnis eine neue Zeile.
+  hardWraps = true
 
-# Inhalte liegen als rohes HTML vor (WordPress-Export).
-# Seit Hugo 0.158 ist text/html in content/ standardmaessig gesperrt.
+# Einzelne Zeilenumbrueche im Markdown werden zu <br> - so, wie es Autorinnen
+# und Autoren aus Word/WordPress erwarten (Adressen, Preislisten).
+[markup.goldmark.extensions]
+  [markup.goldmark.extensions.typographer]
+    disable = true
+[markup.goldmark.parser]
+  # Ein Bild, das allein in einer Zeile steht, wird nicht in <p> eingepackt -
+  # sonst landet das <figure> des Render-Hooks in einem Absatz.
+  wrapStandAloneImageWithinParagraph = false
+  [markup.goldmark.parser.attribute]
+    block = true
+
+# Die Bilder liegen weiterhin unter static/wp-content/uploads (URLs bleiben
+# stabil), sind zusaetzlich aber als Hugo-Ressourcen erreichbar. Dadurch kann
+# der Bild-Render-Hook die responsiven Groessen selbst erzeugen - wer ein Foto
+# einstellt, legt nur noch EINE Datei ab.
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "static/wp-content/uploads"
+    target = "assets/uploads"
+
+# Inhalte sind Markdown. text/html bleibt erlaubt, damit alte Seiten
+# im WordPress-Export-Format weiterhin gebaut werden koennen.
 [security]
   allowContent = ['^text/html$', '^text/markdown$', '^text/x-org$', '^text/asciidoc$', '^text/plain$']
 
@@ -110,57 +142,3 @@ disableKinds = ['taxonomy', 'term']
     id = "14"
     html = '''<p><strong>Bankverbindung:</strong><br/>Pfadfinderzentrum Drei Gleichen e.V.<br/>Kreissparkasse Gotha<br/>IBAN: DE16820520200770000274<br/>BIC-/SWIFT-Code: HELADEF1GTH</p>'''
 
-[menu]
-  [[menu.main]]
-    name = "WILLKOMMEN"
-    url = "/"
-    weight = 10
-    [menu.main.params]
-      itemId = 148
-      pageId = 58
-      home = true
-
-  [[menu.main]]
-    name = "PLATZ &amp; GEBÄUDE"
-    url = "/platz-gebaeude/"
-    weight = 20
-    [menu.main.params]
-      itemId = 137
-      pageId = 106
-      home = false
-
-  [[menu.main]]
-    name = "DIE REGION"
-    url = "/die-region/"
-    weight = 30
-    [menu.main.params]
-      itemId = 136
-      pageId = 109
-      home = false
-
-  [[menu.main]]
-    name = "PREISE &amp; BELEGUNG"
-    url = "/preise/"
-    weight = 40
-    [menu.main.params]
-      itemId = 135
-      pageId = 111
-      home = false
-
-  [[menu.main]]
-    name = "VEREIN"
-    url = "/verein/"
-    weight = 50
-    [menu.main.params]
-      itemId = 162
-      pageId = 161
-      home = false
-
-  [[menu.main]]
-    name = "KONTAKT"
-    url = "/kontakt/"
-    weight = 60
-    [menu.main.params]
-      itemId = 182
-      pageId = 181
-      home = false

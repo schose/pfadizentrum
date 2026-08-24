@@ -5,7 +5,12 @@
 <head>
 {{ partial "head.html" . }}
 </head>
-{{- $bodyClass := .Params.bodyClass }}
+{{- /* Body-Klassen des Rife-Themes. Wirksam sind header-horizontal (Aufbau des
+       Kopfbereichs) und page (Hintergrundbild der Titelleiste). Die uebrigen
+       stammen aus WordPress und bleiben aus Kompatibilitaetsgruenden erhalten.
+       Inhaltspflege muss sich damit nicht befassen. */ -}}
+{{- $bodyClass := "wp-singular page-template-default page wp-theme-rife-free header-horizontal site-layout-full" }}
+{{- if .IsHome }}{{ $bodyClass = printf "home %s" $bodyClass }}{{ end }}
 {{- if eq .Kind "404" }}{{ $bodyClass = "error404 wp-theme-rife-free header-horizontal site-layout-full default404" }}{{ end }}
 <body id="top" class="{{ $bodyClass }}" itemtype="https://schema.org/WebPage" itemscope>
 <div class="whole-layout">
@@ -27,7 +32,7 @@
 			<div class="overlay-color">
 				<div class="in">
 					<div class="titles">
-						<h1 class="page-title entry-title" itemprop="headline">{{ .Params.pageTitle | default .Title | safeHTML }}</h1>
+						<h1 class="page-title entry-title" itemprop="headline">{{ .Title }}</h1>
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="profile" href="https://gmpg.org/xfn/11" />
-<title>{{ if eq .Kind "404" }}Seite nicht gefunden &#8211; {{ site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ site.Title }}{{ else if eq .Kind "404" }}Seite nicht gefunden &#8211; {{ site.Title }}{{ else }}{{ .Title }} &#8211; {{ site.Title }}{{ end }}</title>
 <meta name='robots' content='max-image-preview:large' />
 <style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
 {{- with .OutputFormats.Get "rss" }}
@@ -37,6 +37,7 @@ img.wp-smiley, img.emoji {
 <link rel='stylesheet' id='a13-icomoon-css' href='{{ partial "url.html" "/wp-content/themes/rife-free/css/icomoon.css" }}?ver=2.4.21' type='text/css' media='all' />
 <link rel='stylesheet' id='a13-main-style-css' href='{{ partial "url.html" "/wp-content/themes/rife-free/style.css" }}?ver=2.4.21' type='text/css' media='all' />
 <link rel='stylesheet' id='a13-user-css-css' href='{{ partial "url.html" "/wp-content/uploads/apollo13_framework_files/css/user.css" }}?ver=2.4.21' type='text/css' media='all' />
+<link rel='stylesheet' id='pz-site-css' href='{{ partial "url.html" "/css/pfadizentrum.css" }}' type='text/css' media='all' />
 {{- $tbbg := .Params.titleBarBg | default (cond (eq .Kind "404") "" site.Params.titleBarBg) }}
 {{- with $tbbg }}
 <style id='a13-user-css-inline-css' type='text/css'>
