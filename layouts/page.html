@@ -2,7 +2,7 @@
 <div id="post-{{ .Params.postId }}" class="content-box post-{{ .Params.postId }} page type-page status-publish has-post-thumbnail">
 	<div class="formatter">
 		<div class="real-content" itemprop="text">
-{{ .Content }}
+{{ partial "canonify-content.html" (dict "html" .Content) }}
 		</div>
 	</div>
 </div>

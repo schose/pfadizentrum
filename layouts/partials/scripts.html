@@ -1,20 +1,24 @@
 <script type="text/javascript" id="apollo13framework-plugins-js-extra">
 /* <![CDATA[ */
-var ApolloParams = {{ site.Params.apolloParams | jsonify | safeJS }};
+{{- /* site_url/defimgurl muessen das baseURL-Unterverzeichnis enthalten */ -}}
+{{- $apollo := merge site.Params.apolloParams (dict
+	"site_url" site.Home.RelPermalink
+	"defimgurl" (partial "url.html" site.Params.apolloParams.defimgurl)) }}
+var ApolloParams = {{ $apollo | jsonify | safeJS }};
 /* ]]> */
 </script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/helpers.min.js" | relURL }}?ver=2.4.21" id="apollo13framework-plugins-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/jquery.fitvids.min.js" | relURL }}?ver=1.1" id="jquery-fitvids-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/jquery.fittext.min.js" | relURL }}?ver=1.2" id="jquery-fittext-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/jquery.slides.min.js" | relURL }}?ver=3.0.4" id="jquery-slides-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/jquery.sticky-kit.min.js" | relURL }}?ver=1.1.2" id="jquery-sticky-kit-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/jquery.mousewheel.min.js" | relURL }}?ver=3.1.13" id="jquery-mousewheel-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/typed.min.js" | relURL }}?ver=1.1.4" id="jquery-typed-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/isotope.pkgd.min.js" | relURL }}?ver=3.0.6" id="apollo13framework-isotope-js"></script>
-<script type="text/javascript" src="{{ "/wp-content/themes/rife-free/js/script.min.js" | relURL }}?ver=2.4.21" id="apollo13framework-scripts-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/helpers.min.js" }}?ver=2.4.21" id="apollo13framework-plugins-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/jquery.fitvids.min.js" }}?ver=1.1" id="jquery-fitvids-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/jquery.fittext.min.js" }}?ver=1.2" id="jquery-fittext-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/jquery.slides.min.js" }}?ver=3.0.4" id="jquery-slides-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/jquery.sticky-kit.min.js" }}?ver=1.1.2" id="jquery-sticky-kit-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/jquery.mousewheel.min.js" }}?ver=3.1.13" id="jquery-mousewheel-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/typed.min.js" }}?ver=1.1.4" id="jquery-typed-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/isotope.pkgd.min.js" }}?ver=3.0.6" id="apollo13framework-isotope-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/themes/rife-free/js/script.min.js" }}?ver=2.4.21" id="apollo13framework-scripts-js"></script>
 <script type="text/javascript" id="wp-consent-api-js-extra">
 /* <![CDATA[ */
 var consent_api = {"consent_type":"","waitfor_consent_hook":"","cookie_expiration":"30","cookie_prefix":"wp_consent"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="{{ "/wp-content/plugins/wp-consent-api/assets/js/wp-consent-api.min.js" | relURL }}?ver=1.0.8" id="wp-consent-api-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-content/plugins/wp-consent-api/assets/js/wp-consent-api.min.js" }}?ver=1.0.8" id="wp-consent-api-js"></script>

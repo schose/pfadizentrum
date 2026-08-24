@@ -22,7 +22,7 @@ img.wp-smiley, img.emoji {
 		padding: 0 !important;
 	}
 </style>
-<link rel='stylesheet' id='wp-block-library-css' href='{{ "/wp-includes/css/dist/block-library/style.min.css" | relURL }}?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='{{ partial "url.html" "/wp-includes/css/dist/block-library/style.min.css" }}?ver=6.8.2' type='text/css' media='all' />
 <style id='classic-theme-styles-inline-css' type='text/css'>
 /*! This file is auto-generated */
 .wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
@@ -33,18 +33,18 @@ img.wp-smiley, img.emoji {
 :where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
 :root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
 </style>
-<link rel='stylesheet' id='font-awesome-css' href='{{ "/wp-content/themes/rife-free/css/font-awesome.min.css" | relURL }}?ver=4.7.0' type='text/css' media='all' />
-<link rel='stylesheet' id='a13-icomoon-css' href='{{ "/wp-content/themes/rife-free/css/icomoon.css" | relURL }}?ver=2.4.21' type='text/css' media='all' />
-<link rel='stylesheet' id='a13-main-style-css' href='{{ "/wp-content/themes/rife-free/style.css" | relURL }}?ver=2.4.21' type='text/css' media='all' />
-<link rel='stylesheet' id='a13-user-css-css' href='{{ "/wp-content/uploads/apollo13_framework_files/css/user.css" | relURL }}?ver=2.4.21' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='{{ partial "url.html" "/wp-content/themes/rife-free/css/font-awesome.min.css" }}?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='a13-icomoon-css' href='{{ partial "url.html" "/wp-content/themes/rife-free/css/icomoon.css" }}?ver=2.4.21' type='text/css' media='all' />
+<link rel='stylesheet' id='a13-main-style-css' href='{{ partial "url.html" "/wp-content/themes/rife-free/style.css" }}?ver=2.4.21' type='text/css' media='all' />
+<link rel='stylesheet' id='a13-user-css-css' href='{{ partial "url.html" "/wp-content/uploads/apollo13_framework_files/css/user.css" }}?ver=2.4.21' type='text/css' media='all' />
 {{- $tbbg := .Params.titleBarBg | default (cond (eq .Kind "404") "" site.Params.titleBarBg) }}
 {{- with $tbbg }}
 <style id='a13-user-css-inline-css' type='text/css'>
-.page .title-bar.outside{background-image:url({{ . | relURL }})}
+.page .title-bar.outside{background-image:url({{ partial "url.html" . }})}
 </style>
 {{- end }}
-<script type="text/javascript" src="{{ "/wp-includes/js/jquery/jquery.min.js" | relURL }}?ver=3.7.1" id="jquery-core-js"></script>
-<script type="text/javascript" src="{{ "/wp-includes/js/jquery/jquery-migrate.min.js" | relURL }}?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-includes/js/jquery/jquery.min.js" }}?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="{{ partial "url.html" "/wp-includes/js/jquery/jquery-migrate.min.js" }}?ver=3.4.1" id="jquery-migrate-js"></script>
 <link rel="canonical" href="{{ .Permalink }}" />
 <script type="text/javascript">
 // <![CDATA[
@@ -57,10 +57,10 @@ img.wp-smiley, img.emoji {
 })();
 // ]]>
 </script>
-<link rel="icon" href="{{ "/wp-content/uploads/2024/04/pzdg-logo-150x150.gif" | relURL }}" sizes="32x32" />
-<link rel="icon" href="{{ "/wp-content/uploads/2024/04/pzdg-logo-300x300.gif" | relURL }}" sizes="192x192" />
-<link rel="apple-touch-icon" href="{{ "/wp-content/uploads/2024/04/pzdg-logo-300x300.gif" | relURL }}" />
-<meta name="msapplication-TileImage" content="{{ "/wp-content/uploads/2024/04/pzdg-logo-300x300.gif" | absURL }}" />
+<link rel="icon" href="{{ partial "url.html" "/wp-content/uploads/2024/04/pzdg-logo-150x150.gif" }}" sizes="32x32" />
+<link rel="icon" href="{{ partial "url.html" "/wp-content/uploads/2024/04/pzdg-logo-300x300.gif" }}" sizes="192x192" />
+<link rel="apple-touch-icon" href="{{ partial "url.html" "/wp-content/uploads/2024/04/pzdg-logo-300x300.gif" }}" />
+<meta name="msapplication-TileImage" content="{{ "wp-content/uploads/2024/04/pzdg-logo-300x300.gif" | absURL }}" />
 {{- with .Params.extraCSS }}
 <style id="a13-page-inline-css" type="text/css">{{ . | safeCSS }}</style>
 {{- end }}
