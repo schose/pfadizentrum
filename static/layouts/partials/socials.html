@@ -1,7 +1,0 @@
-{{/* Social-Icons – Klassen exakt wie im Rife-Theme */}}
-{{- $variant := .variant -}}
-<div class="socials icons-only {{ $variant }}">
-{{- range site.Params.socials -}}
-	{{ printf `<a target="_blank" title="%s" href="%s" class="a13_soc-%s fa %s" rel="noopener"></a>` .title .url .slug .icon | safeHTML }}
-{{- end -}}
-</div>

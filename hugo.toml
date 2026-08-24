@@ -2,7 +2,7 @@
 # Original: Theme "Rife Free" 2.4.21 (Apollo13 Framework) auf WordPress 6.8.2
 
 baseURL = 'https://www.pfadizentrum.de/'
-languageCode = 'de-DE'
+locale = 'de-DE'
 defaultContentLanguage = 'de'
 title = 'Pfadizentrum Drei Gleichen'
 enableRobotsTXT = true
@@ -15,6 +15,11 @@ disableKinds = ['taxonomy', 'term']
 
 [markup.goldmark.renderer]
   unsafe = true
+
+# Inhalte liegen als rohes HTML vor (WordPress-Export).
+# Seit Hugo 0.158 ist text/html in content/ standardmaessig gesperrt.
+[security]
+  allowContent = ['^text/html$', '^text/markdown$', '^text/x-org$', '^text/asciidoc$', '^text/plain$']
 
 [params]
   description = "Pfadfinderzentrum Drei Gleichen - Zeltplatz und Freizeitheim in der Mitte Thüringens"
